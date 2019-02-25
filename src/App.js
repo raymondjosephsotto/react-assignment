@@ -1,25 +1,58 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Person from "./Person/Person";
+import Message from "./Person/Message";
+import Button from "@material-ui/core/Button";
 
 class App extends Component {
+  state = {
+    persons: [{ name: "(What?)" }],
+    message: [{ message: "(Your Message)" }]
+  };
+
+  nameChangeHandler = event => {
+    this.setState({
+      persons: [{ name: event.target.value }]
+    });
+  };
+
+  messageChangeHandler = event => {
+    this.setState({
+      message: [{ message: event.target.value }]
+    });
+  };
+
+  consoleLogButton = () => {
+    console.log(this.state.message[0].message);
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <div className="Instruction">
+          <h1>React Assignment - Part 1</h1>
+          <p>Create a person component that takes a name and a phrase.</p>
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            The person component displays the name in H1 and has a button that
+            when clicked console logs the phrase:
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        </div>
+
+        <Person
+          name={this.state.persons[0].name}
+          changed={this.nameChangeHandler}
+        />
+        <Message
+          message={this.state.message[0].message}
+          changedMessage={this.messageChangeHandler}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.consoleLogButton}
+        >
+          Click Me!
+        </Button>
       </div>
     );
   }
