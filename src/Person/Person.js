@@ -1,14 +1,19 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { checkPropTypes } from "prop-types";
 
-const person = props => {
+const Person = ({ name, phrase }) => {
   return (
     <div>
-      Name: <input type="text" onChange={props.changed} value={props.name} />
-      <h1>Hi! My name is {props.name}</h1>
+      <h1>Hi! My name is {name}</h1>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => console.log(phrase)}
+      >
+        Click me!
+      </Button>
     </div>
   );
 };
 
-export default person;
+export default Person;
